@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="br.com.kiko.desafios2.MatchFragment">
+
+    <SearchView
+        android:id="@+id/matchSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </SearchView>
+
+    <AdapterViewFlipper
+        android:id="@+id/adapterViewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </AdapterViewFlipper>
+
+    <LinearLayout
+        android:id="@+id/layoutButtons"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+        <ImageButton
+            android:id="@+id/btnDislike"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_cancel"
+            android:background="#00000000"
+            android:layout_marginStart="20dp"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1" />
+        <ImageButton
+            android:id="@+id/btnLike"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/btn_like"
+            android:background="#00000000"
+            android:layout_marginEnd="20dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
