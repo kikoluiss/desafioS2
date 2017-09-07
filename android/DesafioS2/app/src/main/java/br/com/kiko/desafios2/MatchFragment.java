@@ -74,9 +74,11 @@ public class MatchFragment extends Fragment {
         btnDislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentPosition = adapterViewFlipper.getSelectedItemPosition();
+                currentPosition = adapterViewFlipper.getDisplayedChild();
                 FlipperAdapter tmpAdapter = (FlipperAdapter) adapterViewFlipper.getAdapter();
+
                 tmpAdapter.removeItem(currentPosition);
+
                 if (tmpAdapter.getCount() > 0) {
                     layoutButtons.setVisibility(View.VISIBLE);
                 }
@@ -90,7 +92,7 @@ public class MatchFragment extends Fragment {
         btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentPosition = adapterViewFlipper.getSelectedItemPosition();
+                currentPosition = adapterViewFlipper.getDisplayedChild();
                 FlipperAdapter tmpAdapter = (FlipperAdapter) adapterViewFlipper.getAdapter();
 
                 JSONObject jsonMusic = (JSONObject) tmpAdapter.getItem(currentPosition);
@@ -113,7 +115,7 @@ public class MatchFragment extends Fragment {
                     newMusic.currency = jsonMusic.getString("currency");
                     newMusic.discCount = jsonMusic.getInt("discCount");
                     newMusic.discNumber = jsonMusic.getInt("discNumber");
-                    newMusic.isStreamable = jsonMusic.getInt("isStreamable");
+                    newMusic.isStreamable = jsonMusic.getBoolean("isStreamable") ? 1 : 0;
                     newMusic.kind = jsonMusic.getString("kind");
                     newMusic.previewUrl = jsonMusic.getString("previewUrl");
                     newMusic.primaryGenreName = jsonMusic.getString("primaryGenreName");
@@ -138,6 +140,7 @@ public class MatchFragment extends Fragment {
                 }
 
                 tmpAdapter.removeItem(currentPosition);
+
                 if (tmpAdapter.getCount() > 0) {
                     layoutButtons.setVisibility(View.VISIBLE);
                 }
@@ -183,12 +186,6 @@ public class MatchFragment extends Fragment {
                     String result = getRequest.execute(url).get();
                     JSONObject jsonObject = new JSONObject(result);
                     musicList = jsonObject.getJSONArray("results");
-                    if (musicList.length() > 0) {
-                        layoutButtons.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        layoutButtons.setVisibility(View.GONE);
-                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -199,6 +196,15 @@ public class MatchFragment extends Fragment {
 
                 FlipperAdapter tmpAdapter = (FlipperAdapter) adapterViewFlipper.getAdapter();
                 tmpAdapter.setData(musicList);
+
+                adapterViewFlipper.setDisplayedChild(0);
+
+                if (musicList.length() > 0) {
+                    layoutButtons.setVisibility(View.VISIBLE);
+                }
+                else {
+                    layoutButtons.setVisibility(View.GONE);
+                }
 
                 return false;
             }

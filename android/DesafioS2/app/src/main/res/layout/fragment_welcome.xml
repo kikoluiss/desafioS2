@@ -8,9 +8,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_margin="40dp"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:text="Busque algo..."
-        android:lines="4"/>
+        android:text="Olá, busque suas músicas, cantores(as), bandas ou grupos preferidos!"
+        android:lines="7"/>
 
 </FrameLayout>

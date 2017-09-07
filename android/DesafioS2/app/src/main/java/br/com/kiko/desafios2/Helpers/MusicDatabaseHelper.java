@@ -22,7 +22,7 @@ public class MusicDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Info
     private static final String DATABASE_NAME = "musicDatabase";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Table Names
     private static final String TABLE_MUSICS = "musics";
@@ -100,6 +100,7 @@ public class MusicDatabaseHelper extends SQLiteOpenHelper {
                 KEY_MUSIC_COLLECTION_ID + " INTEGER," +
                 KEY_MUSIC_COLLECTION_NAME + " TEXT," +
                 KEY_MUSIC_COLLECTION_PRICE + " TEXT," +
+                KEY_MUSIC_COLLECTION_VIEW_URL + " TEXT," +
                 KEY_MUSIC_COUNTRY + " TEXT," +
                 KEY_MUSIC_CURRENCY + " TEXT," +
                 KEY_MUSIC_DISC_COUNT + " INTEGER," +

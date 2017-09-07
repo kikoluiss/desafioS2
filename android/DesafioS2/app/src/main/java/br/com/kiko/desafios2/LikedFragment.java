@@ -6,12 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import br.com.kiko.desafios2.dummy.DummyContent;
-import br.com.kiko.desafios2.dummy.DummyContent.DummyItem;
+import br.com.kiko.desafios2.Entities.Music;
+import br.com.kiko.desafios2.Helpers.MusicDatabaseHelper;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class LikedFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    private List<Music> musicList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -53,6 +56,11 @@ public class LikedFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        MusicDatabaseHelper databaseHelper = MusicDatabaseHelper.getInstance(getActivity());
+
+        musicList = databaseHelper.getAllMusics();
+
     }
 
     @Override
@@ -69,7 +77,7 @@ public class LikedFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new LikedRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new LikedRecyclerViewAdapter(musicList, mListener));
         }
         return view;
     }
@@ -104,6 +112,6 @@ public class LikedFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Music item);
     }
 }
